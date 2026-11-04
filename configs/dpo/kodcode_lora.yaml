@@ -1,0 +1,32 @@
+# DPO on top of the merged SFT model, using pairs of its own samples labelled by execution.
+# The frozen reference is the starting (SFT) model, i.e. the policy with the LoRA adapter disabled.
+#   posttrain dpo configs/dpo/kodcode_lora.yaml \
+#     model.name_or_path=runs/sft/<run>/merged preference_file=data/prefs/sft_kodcode.jsonl
+run_name: dpo-kodcode-lora
+seed: 42
+model:
+  name_or_path: REPLACE_WITH_MERGED_SFT_MODEL
+  dtype: bfloat16
+lora:
+  r: 32
+  alpha: 64
+  dropout: 0.05
+  target_modules: all-linear
+preference_file: REPLACE_WITH_PREFERENCE_FILE
+trainer:
+  beta: 0.1
+  loss_type: sigmoid
+  num_train_epochs: 1
+  per_device_train_batch_size: 4
+  gradient_accumulation_steps: 8
+  learning_rate: 1.0e-5
+  lr_scheduler_type: cosine
+  warmup_steps: 0.1
+  max_length: 2048
+  bf16: true
+  gradient_checkpointing: true
+  logging_steps: 5
+  save_strategy: steps
+  save_steps: 100
+  save_total_limit: 2
+  report_to: none

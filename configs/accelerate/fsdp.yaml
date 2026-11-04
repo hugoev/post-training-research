@@ -1,0 +1,20 @@
+# accelerate launch --config_file configs/accelerate/fsdp.yaml -m posttrain.cli sft <config> ...
+# FSDP + QLoRA works because load_model sets bnb_4bit_quant_storage to the compute dtype.
+compute_environment: LOCAL_MACHINE
+distributed_type: FSDP
+num_machines: 1
+num_processes: 2
+mixed_precision: bf16
+machine_rank: 0
+main_training_function: main
+rdzv_backend: static
+same_network: true
+use_cpu: false
+fsdp_config:
+  fsdp_version: 2
+  fsdp_auto_wrap_policy: TRANSFORMER_BASED_WRAP
+  fsdp_cpu_ram_efficient_loading: true
+  fsdp_offload_params: false
+  fsdp_reshard_after_forward: true
+  fsdp_state_dict_type: SHARDED_STATE_DICT
+  fsdp_activation_checkpointing: false

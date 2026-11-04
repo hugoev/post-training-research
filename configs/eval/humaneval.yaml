@@ -1,0 +1,6 @@
+# Original HumanEval, for comparability with published numbers.
+inherit: _common.yaml
+run_name: humaneval
+data:
+  dataset: humaneval
+  split: test

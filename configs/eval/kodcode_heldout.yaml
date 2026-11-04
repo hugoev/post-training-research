@@ -1,0 +1,6 @@
+# In-distribution generalization: 500 KodCode problems never used for training or model selection.
+inherit: _common.yaml
+run_name: kodcode-heldout
+data:
+  dataset: kodcode
+  split: heldout

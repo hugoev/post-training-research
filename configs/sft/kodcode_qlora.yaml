@@ -1,0 +1,6 @@
+# QLoRA ablation: identical to kodcode_lora.yaml except the frozen base is 4-bit NF4.
+# Compare quality, peak memory and step time against the bf16 LoRA run.
+inherit: kodcode_lora.yaml
+run_name: sft-kodcode-qlora
+model:
+  load_in_4bit: true

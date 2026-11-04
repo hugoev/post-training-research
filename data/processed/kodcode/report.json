@@ -1,0 +1,45 @@
+{
+  "source": "KodCode/KodCode-Light-RL-10K",
+  "rows": 10000,
+  "unsupported_tests": 149,
+  "reference_failed": {
+    "runtime_error": 289,
+    "failed": 25
+  },
+  "verified": 9537,
+  "contaminated": [
+    "kodcode/Filter_60052_I",
+    "kodcode/Leetcode_15808_I"
+  ],
+  "decontamination": {
+    "eval_sets": [
+      "mbpp:test",
+      "mbppplus:test",
+      "humaneval:test",
+      "humanevalplus:test"
+    ],
+    "ngram": 10,
+    "threshold": 0.5
+  },
+  "train": 8835,
+  "validation": 200,
+  "heldout": 500,
+  "difficulty": {
+    "train": {
+      "easy": 5874,
+      "medium": 1687,
+      "hard": 1274
+    },
+    "validation": {
+      "easy": 145,
+      "medium": 22,
+      "hard": 33
+    },
+    "heldout": {
+      "medium": 99,
+      "easy": 331,
+      "hard": 70
+    }
+  },
+  "seed": 0
+}

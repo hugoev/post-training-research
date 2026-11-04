@@ -1,0 +1,6 @@
+# For checkpoint and hyperparameter selection. Report final numbers on kodcode_heldout instead.
+inherit: _common.yaml
+run_name: kodcode-validation
+data:
+  dataset: kodcode
+  split: validation

@@ -1,0 +1,22 @@
+# Shared evaluation settings. Every model is evaluated with identical prompts, decoding and sandbox.
+# Evaluate another checkpoint with e.g. run_name=sft model.name_or_path=runs/sft/<run>/merged
+seed: 0
+ks: [1]
+model:
+  name_or_path: Qwen/Qwen2.5-Coder-1.5B
+  dtype: bfloat16
+data:
+  num_prompt_tests: 1
+generation:
+  backend: vllm
+  num_samples: 1
+  temperature: 0.0
+  max_new_tokens: 768
+  batch_size: 32
+  gpu_memory_utilization: 0.8
+  max_model_len: 4096
+execution:
+  timeout_s: 60
+  per_test_timeout_s: 15
+  memory_mb: 4096
+  max_workers: 8

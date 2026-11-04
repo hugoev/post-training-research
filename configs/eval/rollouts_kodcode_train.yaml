@@ -1,0 +1,15 @@
+# Sample a policy 8 times per *training* problem. The samples feed two things:
+#   posttrain build-prefs        -> execution-labelled DPO pairs
+#   posttrain filter-difficulty  -> GRPO prompts with 0 < pass rate < 1
+# Never point this at heldout or validation.
+inherit: _common.yaml
+run_name: rollouts-kodcode-train
+ks: [1, 8]
+data:
+  dataset: kodcode
+  split: train
+  limit: 3000
+generation:
+  num_samples: 8
+  temperature: 1.0
+  top_p: 1.0

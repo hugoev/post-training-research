@@ -1,0 +1,6 @@
+# Original MBPP test split, for comparability with published numbers.
+inherit: _common.yaml
+run_name: mbpp
+data:
+  dataset: mbpp
+  split: test

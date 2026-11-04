@@ -1,0 +1,6 @@
+# Out of distribution: HumanEval+ (EvalPlus), function completion from a signature and docstring.
+inherit: _common.yaml
+run_name: humanevalplus
+data:
+  dataset: humanevalplus
+  split: test

@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.venv/
+.tools/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+runs/
+data/prefs/
+data/tasks/
+data/processed/**/*.jsonl
+wandb/
+trackio/
+*.nsys-rep
+*.qdrep
+.cursor/

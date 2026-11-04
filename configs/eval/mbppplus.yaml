@@ -1,0 +1,7 @@
+# Out of distribution: MBPP+ (EvalPlus) runs each solution on hundreds of extra inputs, which
+# catches solutions that only pass MBPP's 3 original asserts. One original assert is shown.
+inherit: _common.yaml
+run_name: mbppplus
+data:
+  dataset: mbppplus
+  split: test

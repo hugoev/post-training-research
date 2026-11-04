@@ -1,0 +1,43 @@
+# SFT of the *base* model on verified KodCode solutions (bf16 LoRA, fits a 12 GB RTX 3060).
+# Starting from the base model (not -Instruct) isolates the effect of our own post-training;
+# Qwen2.5-Coder-1.5B-Instruct is evaluated separately as an external reference point.
+run_name: sft-kodcode-lora
+seed: 42
+model:
+  name_or_path: Qwen/Qwen2.5-Coder-1.5B
+  dtype: bfloat16
+  load_in_4bit: false
+lora:
+  r: 32
+  alpha: 64
+  dropout: 0.05
+  target_modules: all-linear
+  # Untrained in the base model (embedding norm 0.395 vs ~0.67 for normal tokens): without
+  # this, SFT cannot learn to emit <|im_end|> and generations never stop.
+  trainable_tokens: ["<|im_start|>", "<|im_end|>"]
+data:
+  dataset: kodcode
+  split: train
+  eval_split: validation
+trainer:
+  # The base tokenizer's EOS is <|endoftext|>; chat turns end with <|im_end|>.
+  eos_token: "<|im_end|>"
+  completion_only_loss: true
+  # One epoch (~277 steps, ~75 min on an RTX 3060); compute-bound at ~16 s per step.
+  num_train_epochs: 1
+  per_device_train_batch_size: 8
+  gradient_accumulation_steps: 4
+  learning_rate: 2.0e-4
+  lr_scheduler_type: cosine
+  warmup_steps: 0.03
+  max_length: 1536
+  bf16: true
+  gradient_checkpointing: true
+  logging_steps: 10
+  eval_strategy: steps
+  eval_steps: 100
+  per_device_eval_batch_size: 8
+  save_strategy: steps
+  save_steps: 100
+  save_total_limit: 3
+  report_to: none
